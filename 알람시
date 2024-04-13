@@ -1,0 +1,27 @@
+#include <stdio.h>
+
+int main(void)
+{   
+	int h;
+	int m;
+	
+	scanf("%d %d", &h, &m);
+	int sum = m - 45;
+
+		
+			if (sum < 0)
+			{
+				h = h - 1;
+				sum = sum + 60;
+			}
+			if (h < 0)
+			{
+				h = 23;
+			}
+			printf("%d %d", h, sum);
+		
+	
+	
+
+	return 0;
+}
