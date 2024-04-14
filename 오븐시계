@@ -1,0 +1,23 @@
+#include <stdio.h>
+#include <math.h>
+
+int main(void)
+{
+	int h, m;
+	scanf("%d %d", &h, &m);
+	int making;
+	scanf("%d", &making);
+	int over = making + m;
+	if (over >= 60)
+	{
+		h = h + (over / 60);
+		over = over % 60;
+
+	}
+	if (h >= 24)
+	{
+		h -= 24;
+	}
+	printf("%d %d", h, over);
+	return 0;
+}
