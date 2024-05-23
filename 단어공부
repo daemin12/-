@@ -1,0 +1,46 @@
+#include <stdio.h>
+
+int main(void)
+{
+	char c[1000000];
+	scanf_s("%s",c, 1000000);
+	int alpha[26] = { 0 };
+	int same = 0; 
+	int max = 0, count = 0;
+	char* alphap = c;
+	for (; *alphap != '\0'; alphap++)
+	{
+		if ('a' <= *alphap)
+		{
+			alpha[*alphap - 'a']++;
+		}
+		else if (*alphap <= 'Z')
+		{
+			alpha[*alphap - 'A']++;
+		}
+	}
+	for (int j = 0; j < 26; j++)
+	{
+		if (alpha[j] > count)
+		{
+			max = j;
+			same = 0;
+			count = alpha[j];
+		}
+		else if (alpha[j] == count)
+		{
+			same++;
+		
+		}
+
+	}
+	if (same == 0) // 모든 알파벳의 등장 횟수가 같은 경우
+	{
+		printf("%c", max + 'a');
+	}
+	else // 가장 많이 등장한 알파벳이 여러 개인 경우
+	{
+		printf("?");
+	}
+	return 0;
+}
