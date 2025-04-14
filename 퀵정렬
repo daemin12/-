@@ -1,0 +1,62 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void qsort(int arr[], int low, int high);
+int partition(int arr[], int low, int high);
+
+int main()
+{
+	int num = 0;
+	int arr[1000000];
+
+	scanf("%d", &num);
+
+	for (int i = 0; i < num; i++)
+		scanf("%d", &arr[i]);
+
+
+	qsort(arr, 0, num - 1);
+
+	for (int i = 0; i < num; i++)
+		printf("%d\n", arr[i]);
+
+	return 0;
+}
+
+void qsort(int arr[], int low, int high)
+{
+	if (low < high) // 파티션이 1개가 되면 그 후로는 low가 2가 되어 넘거나 high가 0이 되어 작동을 하지 않음
+	{
+		int pi = partition(arr, low, high); //자리를 바꾸고 피벗이 생기는 구간
+
+		qsort(arr, pi + 1, high);
+		qsort(arr, low, pi - 1);
+	}
+
+
+}
+
+int partition(int arr[], int low, int high)
+{
+	int i = low - 1;
+	int pivot = arr[high];
+
+	for (int j = low; j < high; j++)
+	{
+		if (arr[j] < pivot)
+		{
+			i++;
+			int swap = arr[j];
+			arr[j] = arr[i];
+			arr[i] = swap;
+		}
+	}
+     
+	i += 1;
+
+	int swap = arr[high];
+	arr[high] = arr[i];
+	arr[i] = swap;
+
+	return i;
+}
