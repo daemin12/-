@@ -1,0 +1,62 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MIN(a,b) ((a < b ? a : b))
+
+char arr[50][50];
+
+int get_repaint_count(int i, int j);
+
+int main()
+{
+	int n, m;
+
+	scanf(" %d %d", &n, &m);
+
+	for (int i = 0; i < n; i++)
+		scanf("%s", arr[i]);
+	
+	int min_paint = 64;
+
+	for (int i = 0; i <= n - 8; i++)
+	{	
+		for (int j = 0; j <= m - 8; j++)
+		{
+			min_paint = MIN(min_paint, get_repaint_count(i, j));
+		}
+	}
+
+	printf("%d\n", min_paint);
+
+	return 0;
+}
+
+int get_repaint_count(int i, int j)
+{
+	int w_board = 0;
+	int b_board = 0;
+
+	for (int x = 0; x < 8; x++)
+	{
+		for (int y = 0; y < 8; y++)
+		{
+			int current = arr[i + x][j + y];
+
+			if ((x + y) % 2 == 0)
+			{
+				if (current != 'W')w_board++;
+
+				if (current != 'B')b_board++;
+			}
+
+			else
+			{
+				if (current != 'B')w_board++;
+
+				if (current != 'W')b_board++;
+			}
+		}
+	}
+
+	return MIN(w_board, b_board);
+}
