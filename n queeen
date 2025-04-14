@@ -1,0 +1,51 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void nqueen(int*board, int row, int col); //기록해야하는 체스판, 현재 행, 최대 열
+int judge(int* board, int row, int col);
+int count = 0;
+
+int main()
+{
+	int num;
+	int* board;
+
+	scanf("%d", &num);
+
+	board = (int*)malloc(sizeof(int) * num);
+    
+	nqueen(board, 0, num);
+
+	free(board);
+
+	printf("%d", count);
+
+	return 0;
+}
+
+void nqueen(int* board, int row, int col)
+{
+	if (row == col)
+	{
+		count++;
+		return;
+	}
+
+	for (int i = 0; i < col; i++)
+	{
+		board[row] = i;
+
+			if(judge(board, row, col)) // 해당되는지 판단
+				nqueen(board, row + 1, col);
+	}
+}
+int judge(int* board, int row, int col)
+{
+		for (int j = 0; j < row; j++) //앞에 있던 퀸의 위치와 비교
+		{
+			if (board[row] == board[j] || abs(board[j] - board[row]) == abs(j - row))//같은 열에 있을 때와 혹은 대각선에 있을때
+				return 0;
+
+		}
+		return 1;
+}
